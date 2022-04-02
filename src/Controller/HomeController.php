@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', methods: ['GET'], name: "homepage")]
+    #[Route('/', name: "homepage")]
     public function home(): Response
     {
         return $this->render("home/home.html.twig");
