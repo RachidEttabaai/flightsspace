@@ -1,9 +1,10 @@
-# https://help.github.com/en/actions
 name: Full CI process for Symfony 6
 on:
   push:
     branches:
       - master
+env:
+  ES_HTTP_PORT: 9209
 jobs:
   symfony:
     name: Symfony 6.0 (PHP ${{ matrix.php-versions }})
@@ -18,10 +19,16 @@ jobs:
         ports:
           - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+      # https://hub.docker.com/_/elasticsearch/
+      elasticsearch:
+        image: elasticsearch:6.8.10
+        ports:
+          - 9209:9200
+        options: -e="discovery.type=single-node" --health-cmd="curl http://localhost:9200/_cluster/health" --health-interval=10s --health-timeout=5s --health-retries=10
     strategy:
       fail-fast: true
       matrix:
-        php-versions: ['7.4', '8.0']
+        php-versions: ['8.0', '8.1']
     steps:
       # —— Check Elasticsearch 🔎 ——————————————————————————————————————————————
       - name: Check the Elasticsearch connection from runner host
@@ -39,7 +46,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, dom, filter, gd, iconv, json, mbstring, pdo
+          extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, dom, filter, gd, iconv, json, mbstring
         env:
           update: true
 
@@ -56,11 +63,11 @@ jobs:
       - name: Yarn install
         uses: actions/setup-node@v2
         with:
-          node-version: '12'
-          registry-url: npm.fontawesome.com
+          node-version: '14'
+          #registry-url: npm.fontawesome.com
       - run: yarn install
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
+          #env:
+        #NODE_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
 
       - name: Yarn build
         run: yarn run encore production
@@ -93,17 +100,22 @@ jobs:
           bin/console strangebuzz:version
 
       ## —— Coding standards ✨ ————————————————————————————————————————————————
-      # Can't handle PHP8 for now
-      # - name: Coding standards checks (php_codesniffer + php-cs-fixer)
-      #   run: make cs
-      #   if: matrix.php-versions == '7.4'
+      - name: Coding standards checks (php_codesniffer + php-cs-fixer)
+        run: make cs
+        if: matrix.php-versions == '8.0'
 
       ## —— Static analysis ✨ —————————————————————————————————————————————————
-      # - name: Static analysis of PHP code (PHPStan)
-      #   run: make static-analysis
-      #   if: matrix.php-versions == '7.4'
+      - name: Static analysis of PHP code (PHPStan)
+        run: |
+          bin/console about --env=prod
+          make static-analysis
+
+      ## —— JWT 💫 —————————————————————————————————————————————————————————————
+      - name: Generate the SSL keys
+        run: bin/console lexik:jwt:generate-keypair
 
       ## —— Tests ✅ ———————————————————————————————————————————————————————————
+      # We use the dev env here
       - name: Load Doctrine fixtures and populate the Elasticsearch indexes
         run: |
           make load-fixtures
