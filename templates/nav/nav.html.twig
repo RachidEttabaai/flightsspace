@@ -10,10 +10,11 @@
 						</div>
 						<!-- Primary Navbar items -->
 						<div class="hidden md:flex items-center space-x-1">
-							<a href="{{ path('homepage') }}" class="py-4 px-2 hover:text-green-500 hover:border-green-500 font-semibold ">Home</a>
-							{# <a href="" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Services</a>
-							<a href="" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">About</a>
-							<a href="" class="py-4 px-2 text-gray-500 font-semibold hover:text-green-500 transition duration-300">Contact Us</a> #}
+							<a href="#" class="py-4 px-2 hover:text-green-500 hover:border-green-500 font-semibold ">News</a>
+							<a href="#" class="py-4 px-2 hover:text-green-500 hover:border-green-500 font-semibold ">Blog</a>
+							<a href="#" class="py-4 px-2 hover:text-green-500 hover:border-green-500 font-semibold ">Infos</a>
+							<a href="#" class="py-4 px-2 hover:text-green-500 hover:border-green-500 font-semibold ">Report</a>
+							<a href="#" class="py-4 px-2 hover:text-green-500 hover:border-green-500 font-semibold ">About</a>
 						</div>
 					</div>
 					<!-- Mobile menu button -->
@@ -37,10 +38,11 @@
 			<!-- mobile menu -->
 			<div class="hidden mobile-menu">
 				<ul class="">
-					<li {% if app.request.get('_route') == 'homepage' %}class="active" {% endif %}><a href="{{ path('homepage') }}" class="block text-sm px-2 py-4 text-white bg-green-500 font-semibold">Home</a></li>
-					{# <li><a href="#services" class="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Services</a></li>
-					<li><a href="#about" class="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">About</a></li>
-					<li><a href="#contact" class="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300">Contact Us</a></li> #}
+					<li><a href="#" class="block text-sm px-2 py-4 text-white bg-green-500 font-semibold">News</a></li>
+					<li><a href="#" class="block text-sm px-2 py-4 text-white bg-green-500 font-semibold">Blog</a></li>
+					<li><a href="#" class="block text-sm px-2 py-4 text-white bg-green-500 font-semibold">Infos</a></li>
+					<li><a href="#" class="block text-sm px-2 py-4 text-white bg-green-500 font-semibold">Report</a></li>
+					<li><a href="#" class="block text-sm px-2 py-4 text-white bg-green-500 font-semibold">About</a></li>
 				</ul>
 			</div>
 </nav>
