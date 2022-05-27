@@ -1,4 +1,4 @@
-name: Full CI process for Symfony 6
+name: Full CI process for Symfony 6 project
 on:
   push:
     branches:
