@@ -3,6 +3,7 @@
         "@hotwired/stimulus": "^3.0.0",
         "@symfony/stimulus-bridge": "^3.0.0",
         "@symfony/webpack-encore": "^1.7.0",
+        "@tailwindcss/typography": "^0.5.4",
         "autoprefixer": "^10.4.7",
         "core-js": "^3.0.0",
         "postcss": "^8.4.13",
@@ -21,7 +22,7 @@
         "build": "encore production --progress"
     },
     "engines": {
-        "node": "v18.1.0",
+        "node": "v18.6.0",
         "yarn": "1.22.18"
     }
 }
