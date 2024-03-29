@@ -13,7 +13,7 @@ use Kevinrob\GuzzleCache\CacheMiddleware;
 class MixRepository
 {
     /**
-     * Url of the API 
+     * UAPI's url
      *
      * @var string|null
      */
