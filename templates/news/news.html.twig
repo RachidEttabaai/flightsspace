@@ -21,15 +21,15 @@
                     </a>
                 </h2>
                 <a href="{{ new.url }}" target="_blank">
-                    <img src="{{ new.imageUrl }}" alt="{{ new.title }}" title="{{ new.title }}"/>
+                    <img src="{{ new.image_url }}" alt="{{ new.title }}" title="{{ new.title }}"/>
                 </a>
                 <p>
                   {{ new.summary }}
                 </p>
                 <p>
-                    <a type="button" href="{{ new.url }}" target="_blank" class="no-underline inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Read more on {{ new.newsSite }}</a>
+                    <a type="button" href="{{ new.url }}" target="_blank" class="no-underline inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Read more on {{ new.news_site }}</a>
                 </p>
-                <pre>Published at {{ new.publishedAt|date("d/m/y H:i:s") }}</pre>
+                <pre>Published at {{ new.published_at|date("d/m/y H:i:s") }}</pre>
                 
             </article>
 

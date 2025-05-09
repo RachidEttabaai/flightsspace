@@ -22,8 +22,8 @@
         "build": "encore production --progress"
     },
     "engines": {
-        "node": "v20.3.0",
-        "yarn": "1.22.19"
+        "node": "v23.6.1",
+        "yarn": "1.22.22"
     },
     "dependencies": {
         "@babel/plugin-proposal-class-properties": "^7.18.6"

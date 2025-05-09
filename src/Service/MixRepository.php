@@ -95,7 +95,9 @@ class MixRepository
 
             $promise = $client->sendAsync($request)->then(
                 function ($response) {
-                    return json_decode($response->getBody()->getContents(), true);
+                    $tab = json_decode($response->getBody()->getContents(), true);
+                    //dd($tab["results"]);
+                    return $tab["results"];
                 }
             );
 
